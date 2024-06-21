@@ -5,17 +5,17 @@ import { AuthContext } from "../../context/AuthContext";
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+
   return (
     <div className="homePage">
       <div className="textContainer">
         <div className="wrapper">
-          <h1 className="title">Find Real Estate & Get Your Dream Place </h1>
+          <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
-            officia tenetur voluptas quas, voluptate earum nihil quis, illum
-            magni amet repellat laborum adipisci explicabo eum vero id,
-            assumenda architecto quasi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+            explicabo suscipit cum eius, iure est nulla animi consequatur
+            facilis id pariatur fugit quos laudantium temporibus dolor ea
+            repellat provident impedit!
           </p>
           <SearchBar />
           <div className="boxes">
@@ -28,13 +28,12 @@ function HomePage() {
               <h2>Award Gained</h2>
             </div>
             <div className="box">
-              <h1>1200+</h1>
+              <h1>2000+</h1>
               <h2>Property Ready</h2>
             </div>
           </div>
         </div>
       </div>
-
       <div className="imgContainer">
         <img src="/bg.png" alt="" />
       </div>
