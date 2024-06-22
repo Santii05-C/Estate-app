@@ -10,6 +10,7 @@ function ProfilePage() {
   const { updateUser, currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
@@ -31,7 +32,7 @@ function ProfilePage() {
           <div className="info">
             <span>
               Avatar:
-              <img src={currentUser.avar || "noavatar.jpg"} alt="" />
+              <img src={currentUser.avatar || "noavatar.jpg"} alt="" />
             </span>
             <span>
               Username: <b>{currentUser.username}</b>
