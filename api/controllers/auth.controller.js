@@ -21,9 +21,8 @@ export const register = async (req, res) => {
       },
     });
 
-    console.log(newUser);
-
-    res.status(201).json({ message: "User creted seccessfully" });
+    console.log("Usuario creado exitosamente:", newUser);
+    res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to create user!" });

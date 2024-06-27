@@ -1,11 +1,13 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useState } from "react";
+
 import apiRequest from "../../lib/apiRequest";
 
 function Register() {
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState("false");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,13 +31,13 @@ function Register() {
       navigate("/login");
     } catch (err) {
       setError(err.response.data.message);
+      console.log(err);
     } finally {
-      isLoading(false);
+      setIsLoading(false);
     }
   };
-
   return (
-    <div className="register">
+    <div className="registerPage">
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Create an Account</h1>
@@ -48,7 +50,7 @@ function Register() {
         </form>
       </div>
       <div className="imgContainer">
-        <img src="/bg.png" alt="err" />
+        <img src="/bg.png" alt="" />
       </div>
     </div>
   );
