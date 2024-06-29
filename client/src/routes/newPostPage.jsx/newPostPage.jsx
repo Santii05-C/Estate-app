@@ -3,9 +3,11 @@ import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
+  const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -26,6 +28,7 @@ function NewPostPage() {
           property: inputs.property,
           latitude: inputs.latitude,
           longitude: inputs.longitude,
+          images: images,
         },
         postDetail: {
           desc: value,
@@ -148,7 +151,17 @@ function NewPostPage() {
           </form>
         </div>
       </div>
-      <div className="sideContainer"></div>
+      <div className="sideContainer">
+        <UploadWidget
+          uwConfig={{
+            multiple: true,
+            cloudName: "santii",
+            uploadPreset: "estate",
+            maxImageFileSize: 2000000,
+            folder: "posts",
+          }}
+        />
+      </div>
     </div>
   );
 }
