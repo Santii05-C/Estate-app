@@ -4,11 +4,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import { useNavigate } from "react-router-dom";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +35,7 @@ function NewPostPage() {
         },
         postDetail: {
           desc: value,
-          utilities: inputs.utilities,
+          utilites: inputs.utilities,
           pet: inputs.income,
           size: parseInt(inputs.size),
           school: parseInt(inputs.school),
@@ -40,6 +43,7 @@ function NewPostPage() {
           restaurant: parseInt(inputs.restaurant),
         },
       });
+      navigate("/" + res.data.id);
     } catch (err) {
       console.log(err);
       setError(error);
@@ -152,6 +156,9 @@ function NewPostPage() {
         </div>
       </div>
       <div className="sideContainer">
+        {images.map((image, index) => (
+          <img src={image} key={index} alt="" />
+        ))}
         <UploadWidget
           uwConfig={{
             multiple: true,
@@ -160,6 +167,7 @@ function NewPostPage() {
             maxImageFileSize: 2000000,
             folder: "posts",
           }}
+          setState={setImages}
         />
       </div>
     </div>
