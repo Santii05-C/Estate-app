@@ -126,7 +126,7 @@ function SinglePage() {
             </button>
             <button>
               <img src="/save.png" alt="" />
-              Sace the Place
+              Save the Place
             </button>
           </div>
         </div>
