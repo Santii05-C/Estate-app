@@ -55,7 +55,7 @@ function ProfilePage() {
           <Suspense fallback={<p>Loading...</p>}>
             <Await
               resolve={data.postResponse}
-              errorElement={<p>Error loading postss!</p>}
+              errorElement={<p>Error loading posts!</p>}
             >
               {(postResponse) => <List posts={postResponse.data.userPosts} />}
             </Await>
@@ -66,7 +66,7 @@ function ProfilePage() {
           <Suspense fallback={<p>Loading...</p>}>
             <Await
               resolve={data.postResponse}
-              errorElement={<p>Error loading postss!</p>}
+              errorElement={<p>Error loading posts!</p>}
             >
               {(postResponse) => <List posts={postResponse.data.savedPosts} />}
             </Await>
@@ -75,7 +75,14 @@ function ProfilePage() {
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Chat />
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.chatResponse}
+              errorElement={<p>Error loading chats!</p>}
+            >
+              {(chatResponse) => <Chat chats={chatResponse.data} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
     </div>
