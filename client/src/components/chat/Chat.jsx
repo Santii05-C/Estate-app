@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import "./chat.scss";
-import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
+import { AuthContext } from "../../context/AuthContext";
 
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -26,7 +26,7 @@ function Chat({ chats }) {
     if (!text) return;
     try {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
-      setChat((prev) => ({ ...prev, message: [...prev.messages, res.data] }));
+      setChat((prev) => ({ ...prev, message: [...prev.message, res.data] }));
       e.target.reset();
     } catch (err) {
       console.log(err);
@@ -43,7 +43,7 @@ function Chat({ chats }) {
             key={c.id}
             style={{
               backgroundColor: c.seenBy.includes(currentUser.id)
-                ? "while"
+                ? "white"
                 : "#fecd514e",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
