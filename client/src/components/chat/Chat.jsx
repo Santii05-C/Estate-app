@@ -30,18 +30,17 @@ function Chat({ chats }) {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
       setChat((prev) => ({ ...prev, message: [...prev.message, res.data] }));
       e.target.reset();
+      socket.emit("sendMessage", {
+        receiverId: chat.receiver.id,
+        data: res.data,
+      });
     } catch (err) {
       console.log(err);
     }
   };
 
-  const testSocket = () => {
-    socket.emit("test", "hi from client");
-  };
-
   return (
     <div className="chat">
-      <button onClick={testSocket}>Test me</button>
       <div className="messages">
         <h1>Messages</h1>
         {chats?.map((c) => (
