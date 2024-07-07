@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./chat.scss";
 import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
@@ -39,6 +39,25 @@ function Chat({ chats }) {
     }
   };
 
+  useEffect(() => {
+    const read = async () => {
+      try {
+        await apiRequest.put("/chats/read/" + chat.id);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (chat && socket) {
+      socket.on("getMessage", (data) => {
+        if (chat.id === data.chatId) {
+          setChat((prev) => ({ ...prev, message: [...prev.message, data] }));
+          read();
+        }
+      });
+    }
+  }, [socket, chat]);
+
   return (
     <div className="chat">
       <div className="messages">
@@ -48,9 +67,10 @@ function Chat({ chats }) {
             className="message"
             key={c.id}
             style={{
-              backgroundColor: c.seenBy.includes(currentUser.id)
-                ? "white"
-                : "#fecd514e",
+              backgroundColor:
+                c.seenBy.includes(currentUser.id) || chat?.id === c.id
+                  ? "white"
+                  : "#fecd514e",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >

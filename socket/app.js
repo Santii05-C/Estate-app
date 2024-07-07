@@ -29,7 +29,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
-    console.log(receiverId);
+    const receiver = getUser(receiverId);
+    io.to(receiver.socketId).emit("getMessage", data);
   });
 
   socket.on("disconnet", () => {
