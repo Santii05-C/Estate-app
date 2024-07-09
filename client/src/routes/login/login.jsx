@@ -9,6 +9,7 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { updateUser } = useContext(AuthContext);
+  console.log("hola");
 
   const navigate = useNavigate();
 
